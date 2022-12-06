@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -36,6 +37,10 @@ private CustomerService underTest;
         CustomerResponse response = new CustomerResponse();
         //when
         underTest.getCustomer(customer.getId());
+        //then
+        response.setName(customer.getName());
+        response.setEmail(customer.getEmail());
+        assertThat(underTest.getCustomer(customer.getId())).isEqualTo(response);
     }
 
     @Test
